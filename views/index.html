@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>:: Old Boys ::</title>
+    <link rel="stylesheet" href="/css/home.css" />
+  </head>
+  <body>
+    <div id="wrap">
+      <!-- start header -->
+      <div id="header_wrap">
+        <div id="header">
+          <h1>
+            <a href="/">
+              <img src="https://i.ibb.co/MpWgbfY/team-logo.png" alt="logo" />
+            </a>
+          </h1>
+          <div id="gnb">
+            <ul>
+              {%if token%}{{token}}님, 어서오세요!
+              <li><a href="#">Logout</a></li>
+              {% else %}
+              <li><a href="join/login">Login</a></li>
+              {%endif%}
+              <li><a href="/join/join">Join</a></li>
+              <li>
+                <input type="checkbox" id="menu_icon" />
+                <label for="menu_icon">
+                  <!--label은 inline style-->
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </label>
+                <div id="hamburger_menu">
+                  <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="#">공지사항</a></li>
+                    <li><a href="/board/list">게시판</a></li>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">admin</a></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- end header -->
+
+      <!-- start visual -->
+      <div id="visual_wrap">
+        <div id="visual">
+          <div id="slideSpace">
+            <div id="slidePart">
+              <div id="slideShow">
+                <ul class="slides">
+                  <li>
+                    <img
+                      src="https://i.ibb.co/yfgz5b8/HTML5.png"
+                      alt="slide1"
+                    />
+                  </li>
+                  <li>
+                    <img
+                      src="https://i.ibb.co/ch8K3Gt/CSS3-logo.png"
+                      alt="slide2"
+                    />
+                  </li>
+                  <li>
+                    <img
+                      src="https://i.ibb.co/N3Fvxph/js-logo.png"
+                      alt="slide3"
+                    />
+                  </li>
+                  <li>
+                    <img src="https://i.ibb.co/4gxd9NH/git.png" alt="slide4" />
+                  </li>
+                  <li>
+                    <img
+                      src="https://i.ibb.co/pdC2sMK/Node-js-logo-svg.png"
+                      alt="slide5"
+                    />
+                  </li>
+                </ul>
+                <div class="controller">
+                  <span class="prev"><</span>
+                  <span class="next">></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end visual -->
+
+      <!-- start contents -->
+      <div id="contents_wrap">
+        <div id="contents">
+          <div id="main_contents"></div>
+        </div>
+      </div>
+      <!-- end contents -->
+
+      <!-- start footer -->
+      <div id="footer_wrap">
+        <div id="footer">
+          <ul>
+            <li>
+              <a class="team_ob" href="#">TEAM : old boys</a>
+            </li>
+            <li>
+              <a class="team_ob" href="#">Joo Hyung Kim</a>
+            </li>
+            <li>
+              <a class="team_ob" href="#">Hyung Uoong Choi</a>
+            </li>
+            <li>
+              <a class="team_ob" href="#">Sang Beom Hwang</a>
+            </li>
+            <li>
+              <a class="personal" href="#">행복하자 우리</a>
+            </li>
+          </ul>
+          <div id="footer_info">
+            <h1 id="footer_logo">
+              <img
+                src="https://i.ibb.co/MpWgbfY/team-logo.png"
+                alt="footer_logo"
+              />
+            </h1>
+            <div id="team_info">
+              <p>https://github.com/sangbeomhwang/board_old_boys.git</p>
+              <p>
+                1번 뇌섹남 : 김주형 / 2번 뇌섹남 : 최현웅 / 3번 뇌섹남 : 황상범
+              </p>
+              <p>old boys</p>
+              <p class="copyright">
+                Copyright © 2022. Kyungil Technical College. All rights
+                reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end footer -->
+    </div>
+    <script src="/js/home.js"></script>
+  </body>
+</html>
