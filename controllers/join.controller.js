@@ -18,11 +18,22 @@ exports.getLogin = (req, res) => {
 
 exports.postLogin = async (req, res, next) => {
   const user = await join_service.postLogin(req.body);
-  // console.log(user);
-  if (user === undefined)
-    return next(new Error("아이디와 패스워드가 일치하지 않습니다"));
+  if (user === undefined){
+    res.setHeader("Content-Type", "text/html; charset=utf-8");
+    res.send(`
+    <html>
+      <body>
+        <script>
+          alert("아이디와 패스워드가 일치하지 않습니다. 다시 확인해주세요")
+          window.location.replace("/join/login")
+        </script>
+      </body>
+    </html>
+    `);
+  }else {
   res.setHeader("Set-Cookie", `token="${user.user_id}"; path=/;`);
   res.redirect("/join/welcome");
+  }
 };
 
 // exports.postLogin = async (req,res,next) => {
