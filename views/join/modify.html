@@ -17,9 +17,9 @@
         <form method="post" id="join" action="/join/join">
             <div id="joinidpw">
                 <div id="joinid" class="form_area">
-                    <h3><label for="id" class="icon">아이디</label></h3>
+                    <h3><label for="id" class="icon">{{user.userid}}</label></h3>
                     <span id="inputbox" class="box">
-                        <input class ="inbox" type="text" name="user_id" minlength ="8" maxlength="20" id="id" placeholder="최소8자에서 최대20자를 입력해주세요" required>
+                        <input class ="inbox" type="text" name="user_id" minlength ="8" maxlength="20" id="id" disabled>
                     </span>
                     <span id="alertid">아이디 형식을 다시 확인해주세요</span>
                 </div>
@@ -97,7 +97,7 @@
                 </div> -->
             </div>
             <div class="form_area" id="bottom_area">
-                <button type="submit" class="btn">가입하기</button>
+                <button type="submit" class="btn">수정하기</button>
             </div>
         </form>
         <div id="footer_wrap">

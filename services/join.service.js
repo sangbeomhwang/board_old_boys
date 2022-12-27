@@ -6,7 +6,13 @@ exports.postJoin = async(userData) => {
 }
 
 exports.getLogin = async({user_id, user_pw}) => {
-    const where = {user_id, user_pw};
-    const user = await join.findLogin({ where });
+    // const where = {user_id, user_pw};
+    const user = await join.findUser();
     return user;
 }
+
+exports.postLogin = async({user_id}) => {
+    const result = await join.findLogin(user_id)
+    return result;
+}
+

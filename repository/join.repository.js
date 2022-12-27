@@ -10,28 +10,38 @@ exports.findOne = async(userData) => {
     return (await pool.query(user))
 };
 
-exports.findLogin = async ({ where }) => {
-    try {
-        const payload = Object.entries(where)
-        .map (([key,value]) => `${key} = "${value}"`)
-        .join(" and ");
+// exports.findLogin = async ({ where }) => {
+//     try {
+//         const payload = Object.entries(where)
+//         .map (([key,value]) => `'${key}' = "${value}"`)
+//         .join(" and ");
 
-        const sql = `SELECT * FROM user WHERE ${payload}`;
-        const [[result]] = await pool.query(sql)
-        return result;
-    } catch (e) {
-        throw new Error(e)
-    }
+//         const sql = `SELECT * FROM user WHERE ${payload}`;
+//         const [[result]] = await pool.query(sql)
+//         console.log(obj);
+//         return result;
+//     } catch (e) {
+//         throw new Error(e)
+//     }
+// }
+
+// this.findLogin(obj)
+
+
+exports.findID = async (user_id) => {
+  const userInfo = `SELECT * FROM user where user_id = "${user_id}";`
+  const [result] = await pool.query(userInfo);
+  return result;
 }
 
-const obj = {
-    where : {
-        user_id : "web77222",
-        user_pw : "12341234"
-    },
-}
+// exports.findUser = async (userInfo) => {
+//     const {id, password} = userInfo;
+//   const userInfo = `SELECT * FROM user where user_id = "${user_id}" and user_pw ="${user_pw}"`;
+//   const [result] = await pool.query(userInfo, [id, password]);
+//   return result;
+// };
 
-this.findLogin(obj)
+// this.findUser('web77333').then(data=>console.log(data))
 
 // exports.findLogin = async ({where}) => {
 //     try {

@@ -3,9 +3,9 @@ const app = express();
 const nunjucks = require('nunjucks');
 const router = require('./routes');
 const cookieParser = require('cookie-parser');
-const session = require('express-session');
-const bodyParser = require('body-parser');
-const FileStore = require('session-file-store')
+// const session = require('express-session');
+// const bodyParser = require('body-parser');
+// const FileStore = require('session-file-store')
 
 
 app.set('view engine', 'html');
@@ -17,7 +17,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({extended : false}));
 app.use(cookieParser());
 app.use(router);
-app.use(bodyParser.urlencoded({ extended : false}));
+// app.use(bodyParser.urlencoded({ extended : false}));
 // app.use(session({
 //     secret: '테스트해보자',
 //     resave : false,

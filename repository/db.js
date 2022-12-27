@@ -12,3 +12,5 @@ const pool = mysql
   .promise();
 
 module.exports = pool;
+
+// console.log(pool)

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>::Old_Boys 환영합니다! ::</title>
-    <link rel="stylesheet" href="/board_old_boys/public/css/welcome.css">
+    <link rel="stylesheet" href="/css/welcome.css">
 </head>
 <body>
     <div>
@@ -18,9 +18,10 @@
             <H2>{{item.name}}님, 환영합니다</H2>
         </div>
         <div id="nav">
-            <button>홈페이지로 이동하기</button>
-            <button>게시판으로 이동하기</button>
-            <button>회원정보 수정하기</button>
+            <button>
+              <a href="/">홈페이지로 이동하기</a></button>
+            <button><a href="/board/list">게시판으로 이동하기</a></button>
+            <button><a href="/join/modify">회원정보 수정하기</a></button>
         </div>
     </div>
     <div id="footer_wrap">
