@@ -1,74 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ item.idx }}번째 글입니다</title>
-  </head>
 
-  <body>
-    <h1><a href="/">로고</a></h1>
-    <form action="" id="viewFrm">
-      <div id="article">
-        <div id="article-info">
-          <div>
-            <span>제목 : </span>
-            <span class="article_subject">{{ item.subject }}</span>
-          </div>
-          <div>
-            <span>작성자 : </span>
-            <span class="article_writer">{{ item.writer }}</span>
-          </div>
-          <span>작성일 : </span>
-          <span class="article_date">{{ item.register_date }}</span>
-          <span>조회수 : </span>
-          <span class="article_hit">{{ item.hit }}</span>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ item.idx }}번째 글입니다</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked@3.0.7/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/he@1.2.0/he.min.js"></script>
+  <link rel="stylesheet" href="/css/view.css">
+</head>
+
+<body>
+  <form action="" id="viewFrm">
+    <div id="article">
+      <div class="subject_div">
+        <span>제목 : </span>
+        <span class="article_subject">{{ item.subject }}</span>
+      </div>
+      <div id="article-info">
         <div>
-          <span>내용 : </span>
-          <span class="article_content">{{ item.content }}</span>
+          <span>작성자 : </span>
+          <span class="article_writer">{{ item.writer }}</span>
         </div>
+        <span>작성일 : </span>
+        <span class="article_date">{{ item.register_date }}</span>
+        <span>조회수 : </span>
+        <span class="article_hit">{{ item.hit }}</span>
+      </div>
+      <div>
+        <span class="article_content" id="parsedText"></span>
+      </div>
+    </div>
+  </form>
+  <div class="btnBox">
+    <!-- <form action="/board/delete?index={{ item.idx }}" method="post"> -->
+      <button type="button" class="prev" id="prev">이전 글</button>
+      <button type="button" class="next" id="next">다음 글</button>
+      <button type="button" class="modify">
+        <a href="/board/modify?index={{ item.idx }}">수정하기</a>
+      </button>
+      <!-- <button type="submit" class="delete" name="delete">삭제하기</button> -->
+      <button class="delete" name="delete"><a href="/board/delete?index={{ item.idx }}">삭제하기</a></button>      <button type="button">
+        <a href="/board/list?index=0">목록 보기</a>
+      </button>
+    <!-- </form> -->
+  </div>
+  <div class="commentBox">
+    <div class="commentList">
+        {% for cl in item.comments %}
+        <ul>
+          <li>{{cl.commenter}}</li>
+          <li>{{cl.comment}}</li>
+          <li class="comment_date">{{cl.register_date}}</li>
+          <li><form action="/board/delete?index={{ item.idx }}" method="post">
+            <input type="hidden" name="comment_idx" value="{{ cl.idx }}" />
+            <button type="submit" class="comment_delete" name="delete">🆇</button>
+          </form></li>
+        </ul>
+      {% endfor %}
+      <p class="commentLength">총 {{ item.comments|length }}개의 댓글</p>
+    </div>
+    <form action="/board/view?index={{ item.idx }}" method="post">
+      <div>
+        <input type="hidden" name="commenter" />
+        <textarea name="comment" style="height: 70px;" placeholder="댓글을 작성해주세요"></textarea>
+        <button type="submit">댓글 작성</button>
       </div>
     </form>
-    <div class="btnBox">
-      <form action="/board/delete?index={{ item.idx }}" method="post">
-        <button type="button" class="prev" id="prev">이전 글</button>
-        <button type="button" class="next" id="next">다음 글</button>
-        <button type="button" class="modify">
-          <a href="/board/modify?index={{ item.idx }}">수정하기</a>
-        </button>
-        <button type="submit" class="delete" name="delete">삭제하기</button>
-        <button type="button">
-          <a href="/board/list?index=0">목록 보기</a>
-        </button>
-      </form>
-    </div>
-    <div class="commentBox">
-      <div class="commentList">
-        {% for item in item.comments %}
-        <ul>
-          <li>{{item.commenter}}</li>
-          <li>{{item.comment}}</li>
-          <li class="comment_date">{{item.register_date}}</li>
-        </ul>
-        {% endfor %}
-      </div>
-      <form action="/board/view?index={{ item.idx }}" method="post">
-        <div>
-          <span>작성자</span>
-          <input type="text" name="commenter" />
-        </div>
-        <div>
-          <span>내용</span>
-          <textarea name="comment" id="" cols="30" rows="5"></textarea>
-        </div>
-        <button type="submit">등록</button>
-        <button type="button" class="cancel">취소</button>
-      </form>
-    </div>
-    <input type="hidden" id="prevIdx" value="{{ prevIdx }}" />
-    <input type="hidden" id="nextIdx" value="{{ nextIdx }}" />
-    <script src="/js/view.js"></script>
-  </body>
+  </div>
+  <script>
+    const initialValue = '{{ item.content }}';
+    const parsedElement = document.getElementById('parsedText');
+    parsedElement.innerHTML = marked(he.decode(initialValue));
+  </script>
+</body>
+</script>
+
+<input type="hidden" id="prevIdx" value="{{ prevIdx }}" />
+<input type="hidden" id="nextIdx" value="{{ nextIdx }}" />
+<script src="/js/view.js"></script>
+</body>
+
 </html>

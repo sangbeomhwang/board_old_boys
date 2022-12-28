@@ -4,8 +4,9 @@
 }
 
 body {
-    background: #f5f5f5
+    background: rgb(64,65,78);
 }
+
 
 #wrap {
     width: 80%;
@@ -14,7 +15,7 @@ body {
 }
 
 table {
-    border: 1px #a39485 solid;
+    border: 1px #aeaeae solid;
     font-size: .8em;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
     width: 90%;
@@ -32,8 +33,9 @@ h2 {
 
 .th {
     font-weight: bold;
+    font-size: 12px;
     color: #fff;
-    background: #73685d;
+    background: #1A1B1E;
     text-align: center;
 }
 
@@ -58,7 +60,6 @@ h2 {
     width: 7%;
 }
 
-
 #btnBox {
     margin: 20px auto;
     display: flex;
@@ -72,7 +73,7 @@ h2 {
     position: absolute;
     left: -170%;
     float: left;
-    color: #73685d;
+    color: #ddd;
     font-size: 12px;
 }
 
@@ -106,10 +107,20 @@ h2 {
 
 .prev > button , .next > button {
     cursor: pointer;
-    width: 40px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
     border: none;
-    background-color: transparent;
+    border-radius: 3px;
+    background-color: #1A1B1E;
+    color: #fff;
     text-align: center;
+}
+
+.prev > button:hover,.next > button:hover {
+    background-color: #333;
+    color: #FABE19;
+    cursor: pointer;
 }
 
 
@@ -118,13 +129,19 @@ h2 {
     width: 80px;
     height: 30px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     text-align: center;
     line-height: 30px;
     font-weight: bold;
-    background: #514941;
+    background: #1A1B1E;
     right: -170%;
     float: right;
+}
+
+.goWrite > button:hover > a {
+    background: #000;
+    color: #FABE19;
+    cursor: pointer;
 }
 
 .goWrite > button > a {
@@ -142,16 +159,39 @@ h2 {
     position: relative;
 }
 
-#searchBox > form > button {
+#searchBox > form > div {
+    width: 100%;
+    height: 24;
+    border-radius: 4px;
+    background: #fff;
+}
+
+#searchBox > form > div > select {
+    border: none;
+    outline: none;
+}
+
+#searchBox > form > div > input {
+    border: none;
+    outline: none;
+    padding-left: 4px;
+}
+
+#searchBox > form > div > button {
     width: 38px;
     height: 24px;
     border: none;
-    border-radius: 5px;
+    border-radius: 0 4px 4px 0;
+    line-height: 12px;
     text-align: center;
-    line-height: 24px;
-    font-size: 12px;
-    background: #514941;
-    color: #fff;
+    background: #1A1B1E;
+}
+
+
+
+#searchBox > form > div > button:hover {
+    background: #333;
+    cursor: pointer;
 }
 
 
@@ -168,7 +208,7 @@ tr>td:nth-child(2) {
 }
 
 a {
-    color: #73685d;
+    color: #1A1B1E;
     text-decoration: none;
 }
 

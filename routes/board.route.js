@@ -9,6 +9,8 @@ router.get("/write", controller.getWrite);
 router.post("/write",controller.postWrite);
 router.get("/modify", controller.getModify);
 router.post('/modify', controller.postModify);
-router.post('/delete', controller.postDelete);
+// router.post('/delete', controller.postDelete);
+router.get('/delete',controller.getDelete)
+router.post('/delete', controller.postDelete2);
 
 module.exports = router;

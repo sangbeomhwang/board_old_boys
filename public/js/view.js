@@ -1,3 +1,7 @@
+
+
+
+
 const prev = document.querySelector("#prev");
 const next = document.querySelector("#next");
 const prevIdx = document.getElementById("prevIdx").value;
@@ -47,7 +51,7 @@ next.addEventListener("click", function () {
     if (xhr.status === 200) {
       // handle the response data here
       const data = JSON.parse(xhr.responseText);
-      console.log(idx);
+      // console.log(idx);
     }
   };
   xhr.send();
@@ -56,10 +60,19 @@ next.addEventListener("click", function () {
 const dltBtn = document.querySelector(".delete");
 
 dltBtn.addEventListener("click", (e) => {
-  if (confirm("정말 삭제하시습니까 ?") == true) {
-  } else return e.preventDefault();
+  e.preventDefault()
+  if(confirm("정말 삭제하시습니까 ?")){
+    location.href='/board/delete?index='+index
+  }
 });
 
+
+// const dltComment = document.querySelector(".comment_delete");
+
+// dltComment.addEventListener("click", (e) => {
+//   if (confirm("정말 삭제하시습니까 ?") == true) {
+//   } else return e.preventDefault();
+// });
 
 
 
@@ -73,9 +86,13 @@ let dd = date.getDate();
 dd = (dd > 9 ? "" : "0") + dd;
 let yy = date.getFullYear();
 
+let hr = date.getHours();
+// hr = (hr > 9 ? "" : "0") + hr;
+let mn = date.getMinutes();
+// mn = (mn > 9 ? "" : "0") + mn;
 
 
-postTimeStamp.innerHTML = [yy, mm, dd].join("-");
+postTimeStamp.innerHTML = [yy, mm, dd].join("-") + ' ' + hr + '시' + ' ' + mn + '분';
 
 
 // 댓글 시간
@@ -95,7 +112,7 @@ const parsedTime = timeStrings.map(v => {
   return [yy, mm, dd].join("-") + "." + [hr, mn, sc].join(".");
 });
 
-console.log(parsedTime);
+// console.log(parsedTime);
 
 const getTimeNow = (date) => {
   let mm = date.getMonth() + 1;
@@ -110,7 +127,7 @@ const getTimeNow = (date) => {
   return [yy, mm, dd].join("-") + "." + [hr, mn, sc].join(".");
 };
 const thisTime = getTimeNow(new Date());
-console.log(thisTime)
+// console.log(thisTime)
 
 parsedTime.forEach((timeLine, index) => {
   const splitTimeLine = timeLine.split(".");
@@ -137,4 +154,3 @@ parsedTime.forEach((timeLine, index) => {
     commentTimeStamp[index].innerHTML = splitTimeLine[0];
   }
 });
-

@@ -1,32 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+    <link rel="stylesheet" href="/css/write.css">
 </head>
+
 <body>
-    <h1>
-        <a href="/">로고</a>
-    </h1>
-    <h2>글쓰기</h2>
-    <form action="/board/write" id="writeFrm" method="post">
-        <div>
-            <span>제목</span>
-            <input type="text" name="subject">
-        </div>
-        <div>
-            <span>작성자</span>
-            <input type="text" name="writer">
-        </div>
-        <div>
-            <span>내용</span>
-            <textarea name="content" id="" cols="30" rows="10"></textarea>
-        </div>
-        <button type="submit">등록</button>
-        <button type="button" class="cancel">취소</button>
-    </form>
+    <div id="wrap">
+        <form action="/board/write" id="writeFrm" method="post">
+            <div>
+                <input type="text" name="writer" id="writer">
+            </div>
+            <div>
+                <input type="text" name="subject" id="subject" placeholder="제목을 입력하세요">
+            </div>
+            <div id="content">
+                
+            </div>
+            <textarea name="content" id="content" cols="10" rows="10"></textarea>
+            <div id="buttonBox">
+                <button type="button" class="cancel">🔚 나가기</button>
+                <button type="submit" class="submit">등록하기</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        const Editor = toastui.Editor;
+        const editor = new Editor({
+            el: document.querySelector('#content'),
+            height: '500px',
+            initialEditType: 'markdown',
+            previewStyle: 'vertical'
+        });
+    </script>
     <script src="/js/write.js"></script>
 </body>
+
 </html>

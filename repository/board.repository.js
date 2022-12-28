@@ -5,12 +5,11 @@ exports.findAll = async () => {
   return result;
 };
 
-// exports.findOne = async (idx) => {
-//   await pool.query(`UPDATE board SET hit = hit + 1 WHERE idx = ${idx};`);
-//   const sql = `SELECT * FROM board where idx=${idx};`;
-//   const [[result]] = await pool.query(sql);
-//   return result;
-// };
+exports.findOne = async (idx) => {
+  const sql = `SELECT * FROM board where idx=${idx};`;
+  const [[result]] = await pool.query(sql);
+  return result;
+};
 
 exports.findOne = async (idx) => {
   await pool.query(`UPDATE board SET hit = hit + 1 WHERE idx = ${idx};`);
@@ -74,6 +73,12 @@ exports.deleteItem = async (idx) => {
   const sql = `DELETE FROM board where idx=${idx};`;
   await pool.query(sql);
 };
+
+exports.deleteComment = async (commentIdx) => {
+  const sql = `DELETE FROM comments where idx=${commentIdx};`;
+  await pool.query(sql);
+};
+
 
 // this.findOne(1).then(data=>console.log(data))
 // 프로미스 객체에 then 메서드를 호출해서 그 결과값을 콘솔에 출력

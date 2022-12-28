@@ -30,7 +30,18 @@ exports.postModify = async (writeData) => {
   return result;
 };
 
-exports.postDelete = async (idx) => {
+// exports.postDelete = async (idx) => {
+//   const result = await board.deleteItem(idx);
+//   return result;
+// };
+
+exports.postDelete2 = async (commentIdx) => {
+  const result = await board.deleteComment(commentIdx);
+  return result;
+};
+
+
+exports.getDelete = async (idx) => {
   const result = await board.deleteItem(idx);
   return result;
 };
