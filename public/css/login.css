@@ -72,6 +72,11 @@ a {
     background-color: white;
     margin : 10px 10px 10px 10px;
 }
+
+.inbox:focus {
+  outline: none;
+}
+
 .btn {
 margin-top:20px;
     display: flex;

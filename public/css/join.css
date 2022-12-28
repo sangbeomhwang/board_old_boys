@@ -159,12 +159,20 @@ a {
     margin : 10px 10px 10px 10px;
 }
 
+.inbox:focus {
+    outline: none;
+}
+
 .inbox2 {
     border: none;
     width: 60px;
     height: 40px;
     color:black;
     margin : 4px 4px 4px 4px;
+}
+
+.inbox2:focus {
+    outline: none;
 }
 
 .inbox3 {
@@ -175,12 +183,20 @@ a {
     margin : 4px 4px 4px 4px;
 }
 
+.inbox3:focus {
+    outline: none;
+}
+
 .inbox4 {
     border: none;
     width: 130px;
     height: 40px;
     color:black;
     margin : 4px 4px 4px 4px;
+}
+
+.inbox4:focus {
+    outline: none;
 }
 
 .email {
