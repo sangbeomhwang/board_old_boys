@@ -1,4 +1,3 @@
-const e = require('express');
 const pool = require('./db');
 
 exports.findOne = async(userData) => {
@@ -15,36 +14,39 @@ exports.findOne = async(userData) => {
       return await pool.query(user);
     }
   };
+
+exports.findInfo = async(user_id) => {
+    // const { user_id, user_name, user_nickname, user_birth, user_gender, user_mobile, user_email } = userInfo;
+    const sql = `SELECT * FROM user WHERE user_id = '${user_id}'`;
+    const [[result]] = await pool.query(sql);
+    return result
+}
+
+exports.modifyInfo = async(userInfo, userID) => {
+  const { user_id , user_pw, user_name, user_nickname, user_birth, user_mobile, user_email } = userInfo;
+  const modify = `UPDATE user SET user_id = '${user_id}', user_pw = '${user_pw}', user_name = '${user_name}', user_nickname = '${user_nickname}', user_birth = '${user_birth}', user_mobile = '${user_mobile}', user_email = '${user_email}' WHERE user_id = '${userID}'`;
+  const [result] = await pool.query(modify);
+  console.log(result)
+  return result
+};xw
+
+
+
   
 exports.findId = async (user) => {
   const {user_id} = user
   const idcheck = `SELECT * FROM user WHERE user_id = '${user_id}';`;
-  console.log(idcheck)
+  // console.log(idcheck)
   const userId = {user_id}
     // console.log(result[0][0].user_id)
     // console.log(userId.user_id
   return await pool.query(idcheck)  
   } 
 
+  // exports.findUser = async (user) => {
+  //   const usersql = `SELECT * FROM board WHERE user_id = '${user_id}'
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  // }
 
 
 

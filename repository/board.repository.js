@@ -5,21 +5,34 @@ exports.findAll = async () => {
   return result;
 };
 
-// exports.findOne = async (idx) => {
-//   await pool.query(`UPDATE board SET hit = hit + 1 WHERE idx = ${idx};`);
-//   const sql = `SELECT * FROM board where idx=${idx};`;
-//   const [[result]] = await pool.query(sql);
-//   return result;
-// };
+const cache = new Map();
 
 exports.findOne = async (idx) => {
-  await pool.query(`UPDATE board SET hit = hit + 1 WHERE idx = ${idx};`);
+  let hitCount = cache.get(idx);
+  if (!hitCount || Date.now() - hitCount.timestamp > 60 * 60 * 1000) {
+    await pool.query(`UPDATE board SET hit = hit + 1 WHERE idx = ${idx};`);
+    hitCount = { count: 1, timestamp: Date.now() };
+  } else {
+    hitCount.count++;
+    hitCount.timestamp = Date.now();
+  }
+  cache.set(idx, hitCount);
+
   const boardSql = `SELECT * FROM board WHERE idx = ${idx}`;
   const commentsSql = `SELECT * FROM comments WHERE boardIdx = ${idx}`;
   const [[boardResult]] = await pool.query(boardSql);
   const [commentsResult] = await pool.query(commentsSql);
   return { ...boardResult, comments: commentsResult };
 };
+
+// exports.findOne = async (idx) => {
+//   await pool.query(`UPDATE board SET hit = hit + 1 WHERE idx = ${idx};`);
+//   const boardSql = `SELECT * FROM board WHERE idx = ${idx}`;
+//   const commentsSql = `SELECT * FROM comments WHERE boardIdx = ${idx}`;
+//   const [[boardResult]] = await pool.query(boardSql);
+//   const [commentsResult] = await pool.query(commentsSql);
+//   return { ...boardResult, comments: commentsResult };
+// };
 
 
 exports.nextOne = async (idx) => {
@@ -74,6 +87,12 @@ exports.deleteItem = async (idx) => {
   const sql = `DELETE FROM board where idx=${idx};`;
   await pool.query(sql);
 };
+
+exports.deleteComment = async (commentIdx) => {
+  const sql = `DELETE FROM comments where idx=${commentIdx};`;
+  await pool.query(sql);
+};
+
 
 // this.findOne(1).then(data=>console.log(data))
 // 프로미스 객체에 then 메서드를 호출해서 그 결과값을 콘솔에 출력

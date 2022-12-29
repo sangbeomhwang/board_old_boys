@@ -1,7 +1,8 @@
-console.log("hi");
+console.log("hi")
 
-function closeAndSendValue() {
-  let childId = document.getElementById("chlidId").ariaValueMax;
-  window.opener.document.getElementById("parentID").value = childId;
-  window.close();
+function closeAndSendValue(){
+    console.log(11)
+    let childId = document.getElementById('chlidId').ariaValueMax;
+    window.opener.document.getElementById('user_id').value = childId
+    window.close()
 }

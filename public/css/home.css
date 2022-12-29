@@ -78,6 +78,7 @@ body {
   text-align: center;
   position: relative;
   overflow: hidden;
+  color: #ddd;
 }
 
 #header > ul > li > a {

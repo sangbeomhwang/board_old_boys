@@ -1,30 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+    <link rel="stylesheet" href="/css/write.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
 </head>
+
 <body>
-    <h1><a href="/">로고</a></h1>
-    <h1>수정하기</h1>
-    <form action="/board/modify?index={{ item.idx }}" id="modifyFrm" method="post">
-        <div>
-            <span>제목</span>
-            <input type="text" name="subject" value="{{ item.subject }}">
-        </div>
-        <div>
-            <span>작성자</span>
-            <input type="text" name="writer" value="{{ item.writer }}">
-        </div>
-        <div>
-            <span>내용</span>
-            <textarea name="content" id="" cols="30" rows="10">{{ item.content }}</textarea>
-        </div>
-        <button type="submit">등록</button>
-        <button class="cancel">취소</button>
-    </form>
+    <div id="wrap">
+        <form action="/board/modify?index={{ item.idx }}" id="modifyFrm" method="post">
+            <div>
+                <input type="hidden" name="writer"  id="writer" value="{{ item.writer }}">
+            </div>
+            <div>
+                <input type="text" name="subject" id="subject" value="{{ item.subject }}">
+            </div>
+            <div>
+                <div id="content">{{ item.content }}</div>
+                <input type="hidden" name="content" id="hiddenContent" value="{{ item.content }}">
+            </div>
+            <div id="buttonBox">
+                <button type="button" class="cancel">🔚 나가기</button>
+                <button type="submit" class="submit">수정 완료</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        const Editor = toastui.Editor;
+        const editor = new Editor({
+            el: document.querySelector('#content'),
+            height: '500px',
+            initialEditType: 'markdown',
+            previewStyle: 'vertical'
+        });
+        // document.getElementById('modifyFrm').addEventListener('submit', (e) => {
+        //     event.preventDefault();
+        //     let content = document.getElementById('content').innerHTML;
+        //     document.getElementById('hiddenContent').value = content; 
+        //     document.getElementById('modifyFrm').submit();
+        // });
+    </script>
     <script src="/js/modify.js"></script>
 </body>
+
 </html>

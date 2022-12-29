@@ -16,8 +16,17 @@ exports.postLogin = async(userInfo) => {
     return result;
 }
 
-
 exports.postIdCheck = async(userId) => {
     const result = await join.findId(userId);
+    return result;
+}
+
+exports.getProfile = async(userInfo) => {
+    const result = await join.findInfo(userInfo);
+    return result;
+}
+
+exports.postProfile = async(userInfo, userID) => {
+    const result = await join.modifyInfo(userInfo, userID)
     return result;
 }

@@ -1,3 +1,11 @@
+const token = document.cookie.split("=")[1].replace(/"/g, '')
+console.log(token)
+const writerInput = document.querySelector('#writer');
+
+if (token) {
+  writerInput.value = token;
+}
+
 const writeFrm = document.querySelector("#modifyFrm");
 
 submitHandler = (event) => {

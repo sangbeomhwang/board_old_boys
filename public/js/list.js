@@ -2,6 +2,7 @@ const searchParams = new URLSearchParams(window.location.search);
 const pageIndex = searchParams.get("index");
 const totalList = document.querySelector(".total_article");
 const totalNumber = totalList.textContent;
+console.log(pageIndex)
 
 let items = document.querySelectorAll("tbody > tr");
 const paging = document.querySelector(".paging");
@@ -16,6 +17,11 @@ if (totalNumber % 10 == 0) {
   lastPage = parseInt(totalNumber / 10 + 1);
 }
 
+let maxLastPage = 5;
+if (lastPage > maxLastPage) {
+  lastPage = maxLastPage;
+}
+
 function pageTemplate() {
   let pageArr = [];
   for (let i = 0; i < lastPage; i++) {
@@ -28,6 +34,17 @@ function pageTemplate() {
   return pageArr;
 }
 paging.innerHTML += pageTemplate().join("");
+
+
+const pageLinks = document.querySelectorAll('.pageMove');
+pageLinks.forEach(v => {
+  if (v.innerHTML == Number(pageIndex)+1) {
+    v.style.color = '#FABE19';
+  }
+  else v.style.color = '#DDDDDD';
+});
+
+
 
 function prevHandler(e) {
   if (pageIndex > 0) {
@@ -117,8 +134,8 @@ parsedTime.forEach((timeLine, index) => {
 });
 
 // 검색 기능
-const searchBtn = document.querySelector("#searchBox > form > button");
-const searchInput = document.querySelector("#searchBox > form > input");
+const searchBtn = document.querySelector("#searchBox > form > div > button");
+const searchInput = document.querySelector("#searchBox > form > div > input");
 const searchResult = document.querySelectorAll("#btnBox > p");
 const errorMessage = document.querySelector("#searchBox > form > p");
 
@@ -134,7 +151,8 @@ searchHandler = (event) => {
   try {
     if (searchInput.value.trim().length < 2) {
       errorMessage.style.opacity = "1";
-      errorMessage.style.color = "#73685d";
+      errorMessage.style.padding = "5px 0 0 0";
+      errorMessage.style.color = "#fff";
       errorMessage.style.fontSize = "12px";
       setTimeout(() => {
         errorMessage.style.opacity = 0;
