@@ -20,7 +20,7 @@
           <li><a href="/board/list">BOARD</a></li>
           <li><img src="https://i.ibb.co/RTjgWsX/imageedit-22-4204026569.png" alt="logo" width="100%" /></li>
           {% if token %}
-          <li style="color: darkorange;">{{ token }}</a></li>
+          <li style="color: darkorange;">{{ token }}님 안녕하세요~</a></li>
           <li><a href="/join/logout">LOGOUT</a></li>
           {% else %}
           <li><a href="/join/login">LOGIN</a></li>
@@ -36,7 +36,6 @@
             </label>
             <div id="hamburger_menu">
               <ul>
-                <li><a href="">{{ token }}</a></li>
                 <li><a href="#">PROFILE</a></li>
                 <li><a href="#">ADMIN</a></li>
                 <li><a href="#">CONTACT</a></li>
