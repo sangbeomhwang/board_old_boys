@@ -5,10 +5,8 @@ const join = require("./join.route");
 
 router.get("/", (req, res) => {
   if (req.cookies.token) {
-    console.log(3);
     res.render("index.html", { token: req.cookies.token });
   } else {
-    console.log(2);
     res.render("index.html");
   }
 });

@@ -12,8 +12,12 @@ exports.postJoin = async (req, res) => {
     res.setHeader("Set-Cookie", `token="${user.user_id}"; path=/;`);
     res.redirect("/join/welcome");
   } catch (error) {
-    if (error.message.includes('아이디가 이미 존재합니다. 다른 아이디를 사용해주세요')) {
-      res.redirect('/join/join');
+    if (
+      error.message.includes(
+        "아이디가 이미 존재합니다. 다른 아이디를 사용해주세요"
+      )
+    ) {
+      res.redirect("/join/join");
     } else {
       // Handle other errors
     }
@@ -26,7 +30,7 @@ exports.getLogin = (req, res) => {
 
 exports.postLogin = async (req, res, next) => {
   const user = await join_service.postLogin(req.body);
-  if (user === undefined){
+  if (user === undefined) {
     res.setHeader("Content-Type", "text/html; charset=utf-8");
     res.send(`
     <html>
@@ -38,9 +42,9 @@ exports.postLogin = async (req, res, next) => {
       </body>
     </html>
     `);
-  }else {
-  res.setHeader("Set-Cookie", `token="${user.user_id}"; path=/;`);
-  res.redirect("/join/welcome");
+  } else {
+    res.setHeader("Set-Cookie", `token="${user.user_id}"; path=/;`);
+    res.redirect("/join/welcome");
   }
 };
 
@@ -62,15 +66,15 @@ exports.logout = async (req, res) => {
 };
 
 exports.getIdCheck = (req, res) => {
-  res.render("join/idcheck.html")
-}
+  res.render("join/idcheck.html");
+};
 
-exports.postIdCheck = async (req,res,next) => {
-  const [result] = await join_service.postIdCheck({ user_id: req.body.user_id });
+exports.postIdCheck = async (req, res, next) => {
+  const [result] = await join_service.postIdCheck({
+    user_id: req.body.user_id,
+  });
   console.log(req.body.user_id);
-  console.log(12)
   if (result.length !== 0) {
-    console.log(13)
     res.setHeader("Content-Type", "text/html; charset=utf-8");
     res.send(`
     <html>
@@ -83,9 +87,8 @@ exports.postIdCheck = async (req,res,next) => {
     </html>
     `);
   } else {
-    console.log(14)
     res.setHeader("Set-Cookie", `token="${req.body.user_id}"; path=/;`);
-  res.send(`
+    res.send(`
   <html>
     <body>
       <script>
@@ -93,9 +96,9 @@ exports.postIdCheck = async (req,res,next) => {
         window.close()
       </script>
     </body>
-  </html>`)
-  next(); 
-}
+  </html>`);
+    next();
+  }
 };
 
 // exports.getIdCheck = (req,res) =>{
