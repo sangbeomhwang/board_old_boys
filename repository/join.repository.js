@@ -1,14 +1,54 @@
+const e = require('express');
 const pool = require('./db');
 
 exports.findOne = async(userData) => {
-    const {user_id, user_pw, user_name, user_nickname, user_birth, user_gender, user_mobile, user_email} = userData;
-    const user = `insert into user (
-        user_id, user_pw, user_name, user_nickname, user_birth, user_gender, user_mobile, user_email
-    ) values (
-        '${user_id}', '${user_pw}', '${user_name}', '${user_nickname}', '${user_birth}', '${user_gender}', '${user_mobile}', '${user_email}'
-    );` 
-    return (await pool.query(user))
-};
+    const { user_id, user_pw, user_name, user_nickname, user_birth, user_gender, user_mobile, user_email } = userData;
+    const idcheck = `SELECT * FROM user WHERE user_id = '${user_id}'`;
+    try {
+      const result = await pool.query(idcheck);
+      const userId = {user_id}
+      if (result[0][0].user_id === userId.user_id) {
+        return {error : "Error"}
+      } 
+    } catch (error) {
+      const user = `INSERT INTO user (user_id, user_pw, user_name, user_nickname, user_birth, user_gender, user_mobile, user_email) VALUES ('${user_id}', '${user_pw}', '${user_name}', '${user_nickname}', '${user_birth}', '${user_gender}', '${user_mobile}', '${user_email}')`;
+      return await pool.query(user);
+    }
+  };
+  
+exports.findId = async (user) => {
+  const {user_id} = user
+  const idcheck = `SELECT * FROM user WHERE user_id = '${user_id}';`;
+  console.log(idcheck)
+  const userId = {user_id}
+    // console.log(result[0][0].user_id)
+    // console.log(userId.user_id
+  return await pool.query(idcheck)  
+  } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 exports.findLogin = async(userInfo) => {
@@ -20,21 +60,6 @@ exports.findLogin = async(userInfo) => {
 }
 
 
-
-// exports.findLogin = async ({ where }) => {
-//     try {
-//         const payload = Object.entries(where)
-//         .map (([key,value]) => `'${key}' = "${value}"`)
-//         .join(" and ");
-
-//         const sql = `SELECT * FROM user WHERE ${payload}`;
-//         const [[result]] = await pool.query(sql)
-//         console.log(obj);
-//         return result;
-//     } catch (e) {
-//         throw new Error(e)
-//     }
-// }
 
 // this.findLogin(obj)
 

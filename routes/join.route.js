@@ -10,5 +10,7 @@ router.get("/welcome", controller.getWelcome);
 router.post("/welcome", controller.postWelcome);
 router.get("/modify", controller.getModify);
 router.get("/logout", controller.logout);
+router.get("/idcheck", controller.getIdCheck);
+router.post("/idcheck", controller.postIdCheck);
 
 module.exports = router;

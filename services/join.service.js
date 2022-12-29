@@ -16,3 +16,8 @@ exports.postLogin = async(userInfo) => {
     return result;
 }
 
+
+exports.postIdCheck = async(userId) => {
+    const result = await join.findId(userId);
+    return result;
+}
